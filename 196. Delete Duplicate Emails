@@ -1,0 +1,32 @@
+# Please write a DELETE statement and DO NOT write a SELECT statement.
+# Write your MySQL query statement below
+
+-- it will not modify the table data, but we need to modify it
+select id, email
+from person
+where id in(
+    select min(id)
+    from person
+    group by email
+);
+
+
+-- Because in MySQL, you can't modify the same table which you use in the SELECT part. That's why we have to use nesting twice else there is an error "You can't specify target table 'Person' for update in FROM clause".
+delete from person
+where id not in(
+    select min(id)
+    from person
+    group by email
+);
+
+-- Whenever u have a dynamic temporary table, you will always have to provide a name to it. Hence the 'as p' should be added. You can provide any name to this temp table.
+delete from person
+where id not in(
+    select * from(
+        select min(id)
+        from person
+        group by email
+    ) as temp
+);
+
+
