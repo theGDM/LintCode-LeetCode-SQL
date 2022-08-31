@@ -1,0 +1,6 @@
+-- Write your SQL Query here --
+-- example: SELECT * FROM XX_TABLE WHERE XXX --
+-- SELF JOIN
+select b.id as id
+from new_cases as a, new_cases as b
+where datediff(b.date, a.date) = 1 and a.increased_count < b.increased_count;
