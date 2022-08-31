@@ -1,0 +1,36 @@
+# Write your MySQL query statement below
+-- using in, and nested queries
+-- my way, two nested sub queries,
+-- firts find out the max salary
+-- then find out all the salaries, which are not max salary
+-- then find the max out of them
+
+SELECT MAX(Salary) AS SecondHighestSalary
+FROM Employee
+WHERE Salary in (SELECT Salary FROM Employee HAVING Salary <> (SELECT MAX(Salary) From Employee));
+
+
+# Write your MySQL query statement below
+-- my way, two nested sub queries,
+-- firts find out the max salary
+-- then find out all the salaries, which are not max salary
+-- then find the max out of them
+
+SELECT MAX(Salary) AS SecondHighestSalary
+FROM Employee
+WHERE Salary in (SELECT Salary FROM Employee HAVING Salary <> (SELECT MAX(Salary) From Employee));
+
+
+-- find all the salry less than max salary, and find out the max out of them
+SELECT MAX(Salary) AS SecondHighestSalary
+FROM Employee
+WHERE Salary < (SELECT MAX(Salary) FROM Employee);
+
+-- LeetCode Solution
+SELECT  
+IFNULL(
+    (SELECT DISTINCT Salary
+     FROM Employee
+     ORDER BY Salary DESC
+     LIMIT 1 OFFSET 1), null
+) AS SecondHighestSalary;
