@@ -1,7 +1,29 @@
 -- Write your SQL Query here --
 -- example: SELECT * FROM XX_TABLE WHERE XXX --
+
+-- ALL
 SELECT name as player
 FROM users
 WHERE id != ALL (SELECT user_id FROM recharges);
 -- This is useful as, ALL logical operator, will compare all the ids of the table player, which
 -- are not equal to the subquery result..
+
+
+-- IN
+select u.name as player
+from users as u
+where u.id not in(
+    select user_id
+    from recharges
+);
+
+-- JOIN
+-- Write your SQL Query here --
+-- example: SELECT * FROM XX_TABLE WHERE XXX --
+select u.name as player
+from users as u
+left join recharges as e
+on u.id = e.user_id
+where e.user_id is null;
+
+
