@@ -1,0 +1,5 @@
+-- Write your SQL Query here --
+-- example: SELECT * FROM XX_TABLE WHERE XXX --
+select s.name, s.math, s.cst
+from student_scores as s
+where s.math > 90 or s.cst > 95;
