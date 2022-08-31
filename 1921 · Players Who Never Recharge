@@ -1,0 +1,7 @@
+-- Write your SQL Query here --
+-- example: SELECT * FROM XX_TABLE WHERE XXX --
+SELECT name as player
+FROM users
+WHERE id != ALL (SELECT user_id FROM recharges);
+-- This is useful as, ALL logical operator, will compare all the ids of the table player, which
+-- are not equal to the subquery result..
