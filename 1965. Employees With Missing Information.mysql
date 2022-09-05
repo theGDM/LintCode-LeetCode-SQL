@@ -1,0 +1,25 @@
+# Write your MySQL query statement below
+-- Union AND Select
+SELECT employee_id
+FROM Employees
+WHERE employee_id NOT IN (SELECT employee_id FROM Salaries)
+UNION ALL
+SELECT employee_id
+FROM Salaries
+WHERE employee_id NOT IN (SELECT employee_id FROM Employees)
+ORDER BY employee_id ASC;
+
+-- AS IN CASE OF MY SQL FULL JOIN IS NOT THERE
+SELECT E.employee_id
+FROM Employees AS E
+LEFT JOIN Salaries AS S
+ON E.employee_id = S.employee_id
+WHERE salary IS NULL
+UNION ALL
+SELECT S.employee_id 
+FROM Employees AS E
+RIGHT JOIN Salaries AS S
+ON E.employee_id = S.employee_id
+WHERE name IS NULL
+ORDER BY employee_id ASC;
+
